@@ -1,4 +1,3 @@
-
 <?php
 
 // check whether command and host are set
