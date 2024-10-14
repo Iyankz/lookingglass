@@ -68,7 +68,7 @@
 
 18. Install LookingGlass
 ##
-    /var/www/html/LookingGlass# bash configure.sh
+    bash configure.sh
 
 19. Langkah Selanjutnya tinggal menyesuaikan (Domain, IP Public, Thema, dan Ukuran File yang akan di test)
 20. Download File ajax.php
