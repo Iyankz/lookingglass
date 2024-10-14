@@ -80,7 +80,10 @@
     cp ajax.php /var/www/html/ajax.php
 
 22. Restart Apache2
-###
+##
     systemctl restart apache2
 
 22. Akses IP/Domain server lookingglass
+23. Jika ingin memodifikasi tampilan lookingglass bisa edit file :
+##
+    nano /var/www/html/index.php 
