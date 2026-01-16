@@ -1,89 +1,59 @@
-# lookingglass
+# LookingGlass Auto Installer for Ubuntu 22.04
 
-# Install Lookingglass Ubuntu 22.04
+[![Author](https://img.shields.io/badge/Author-Iyankz-blue.svg)](https://github.com/Iyankz)
+[![Platform](https://img.shields.io/badge/Platform-Ubuntu%2022.04-orange.svg)](https://ubuntu.com/)
 
-1. Login dengan privilege root
-2. Sesuaikan Jam
-##
-    timedatectl set-timezone Asia/Jakarta
+Script ini dirancang untuk mempercepat proses instalasi **LookingGlass** (oleh telephone) pada server Ubuntu 22.04. Sangat cocok digunakan oleh Network Engineer atau ISP untuk memberikan fasilitas pengecekan jaringan (Ping, Traceroute, MTR) kepada pelanggan secara transparan.
 
-3. Install Web Server Apache2
-##
-    apt install apache2 apache2-utils -y
+## 🚀 Fitur Utama
+- **Auto-Config Timezone:** Otomatis set ke `Asia/Jakarta`.
+- **LAMP Stack:** Otomatis install Apache2, MariaDB, dan PHP versi terbaru yang kompatibel.
+- **Database Management:** Terintegrasi dengan phpMyAdmin untuk pengelolaan database GUI.
+- **Custom Patch:** Menggunakan file `ajax.php` yang sudah dioptimasi dari repository [Iyankz](https://github.com/Iyankz).
+- **Interactive Setup:** Menjalankan `configure.sh` bawaan LookingGlass untuk pengaturan site.
 
-4. Install PHP Engine
-##
-    apt-get install php libapache2-mod-php php-cli php-mysql php-zip php-curl php-xml -y
+## 📋 Prasyarat
+- Server dengan OS **Ubuntu 22.04**.
+- Akses **Root** atau user dengan hak akses **Sudo**.
+- Koneksi Internet.
 
-5. Install MariaDB
-##
-    apt-get install mariadb-server -y
+## 🛠️ Cara Instalasi
 
-6. Install Database
-##
-    mysql_secure_installation
+Kamu bisa menjalankan instalasi dengan satu perintah (One-Liner) atau dengan mengklon repository ini:
 
-7. Download PHPMyAdmin
-##
-    wget https://files.phpmyadmin.net/phpMyAdmin/5.1.1/phpMyAdmin-5.1.1-english.tar.gz 
+### Opsi 1: One-Liner (Fast Install)
+```bash
+wget -qO- [https://raw.githubusercontent.com/Iyankz/lookingglass/main/install.sh](https://raw.githubusercontent.com/Iyankz/lookingglass/main/install.sh) | sudo bash
+```
+### Opsi 2: Manual Clone
+* Clone repository ini:
+```bash
 
-8. Extrak File PHPMyAdmin
-##
-    tar xvf phpMyAdmin-5.1.1-english.tar.gz 
+git clone [https://github.com/Iyankz/lookingglass.git](https://github.com/Iyankz/lookingglass.git)
+cd lookingglass
+```
+* Berikan izin eksekusi pada script:
+```bash
+chmod +x install.sh
+```
+Jalankan script:
+```bash
+sudo ./install.sh
+```
 
-9. Pindahkan isi directory yang di extrak 
-##
-    mv phpMyAdmin-5.1.1-english /usr/share/phpmyadmin 
-10. Buat file phpmyadmin.conf
-##
-    nano /etc/apache2/conf-enabled/phpmyadmin.conf
+## 🖥️ Setelah Instalasi Selesai
+Setelah script berhasil dijalankan, kamu dapat mengakses layanan melalui browser:
 
-11. Masukan Script ke file phpmyadmin.conf
-##
-    Alias /phpmyadmin /usr/share/phpmyadmin 
+* LookingGlass: http://ip-server-kamu/
+* phpMyAdmin: http://ip-server-kamu/phpmyadmin
 
-12. Restart Apache2
-##
-    systemctl restart apache2
+## 📁 Struktur Direktori
 
-13. Download LookingGlass
-##
-    git clone https://github.com/telephone/LookingGlass.git 
+* Web Root: /var/www/html/
+* Konfigurasi LookingGlass: /var/www/html/LookingGlass/
+* Patch File: /var/www/html/ajax.php
 
-14. Pindahkan Directori LookingGlass 
-##
-    mv LookingGlass /var/www/
+## ✍️ Kontribusi
+Jika kamu menemukan bug atau ingin menambahkan fitur (seperti integrasi Telegram Bot atau custom theme), silakan kirim Pull Request atau buka Issue di repository ini.
 
-15. Pisahkan File LookingGlass
-##
-    mv /var/www/LookingGlass/* /var/www/html/
-
-16. Hapus File index.html pada directory /var/www/html/
-##
-    rm /var/www/html/index.html
-
-17. masuk ke Folder LookingGlass
-## 
-    cd /var/www/html/LookingGlass/
-
-18. Install LookingGlass
-##
-    bash configure.sh
-
-19. Langkah Selanjutnya tinggal menyesuaikan (Domain, IP Public, Thema, dan Ukuran File yang akan di test)
-20. Download File ajax.php
-##
-    wget https://raw.githubusercontent.com/Iyankz/lookingglass/refs/heads/main/ajax.php
-
-21. Copy File ajax.php yang sudah di download
-##
-    cp ajax.php /var/www/html/ajax.php
-
-22. Restart Apache2
-##
-    systemctl restart apache2
-
-22. Akses IP/Domain server lookingglass
-23. Jika ingin memodifikasi tampilan lookingglass bisa edit file :
-##
-    nano /var/www/html/index.php 
+Maintained by Iyankz Operations Manager at PT Proxi Jaringan Nusantara, PT Mitra Internet Indonesia, & PT Bentang Johar Awal.
